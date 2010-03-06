@@ -1,0 +1,6 @@
+===============================
+whoami - print effective userid
+===============================
+
+Options: -v Show version
+	 -h Show this help
