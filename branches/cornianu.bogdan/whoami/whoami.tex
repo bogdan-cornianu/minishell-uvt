@@ -1,0 +1,27 @@
+%% LyX 1.6.5 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+
+\begin{document}
+---------------------------------------------
+
+WHOAMI - print effective userid
+
+---------------------------------------------
+
+WHOAMI uses the GETEUID and GETPWUID system calls. GETPWUID receives
+as an argument the GETEUID return value.
+
+GETEUID - returns the real user ID of the current process.
+
+GETPWUID - returns a pointer to a structure containing the broken-out
+fields of the record in the password database that matches the user
+ID uid.
+
+pwd is declared as \textbf{struct passwd {*} }and then we access the
+name field by using pwd->pw\_name and we print it to the screen. The
+pwd->pw\_name represents the effective userid.
+\end{document}
