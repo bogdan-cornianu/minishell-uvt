@@ -2,11 +2,11 @@
 **
 ** Module Name: cp.c
 **
-** Project Name: UNIX CSHell
+** Project Name: Minishell-UVT
 **
 ********************************************************************************
 **
-** Created By: moraru.ionut
+** Created By: Moraru Ionut (morion4000)
 **
 ** Description: Implementation of the UNIX cp command;
 **
@@ -18,9 +18,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <dirent.h>
-#include <libgen.h>
-#include <signal.h>
-#include <fcntl.h>
 
 #include <pwd.h>
 #include <grp.h>
@@ -32,32 +29,24 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 
+// Declare functions used;
+int is_dir(const char*);
+int exists(char *);
+int copy_file(char *, char *);
+int make_dir(char *, mode_t);
+
+// Main function;
 int main(int argc, char **argv) {
 	// Definition of local variables;
 	int o;
 	char *source = NULL, *dest = NULL;
 	int i_flag = 0, r_flag = 0, v_flag = 0;
 
-	/*
-	 * Define text help and
-	 * version commands;
-	 */
-	char * const help = "Usage: cp [OPTION] SOURCE DEST\n Copy SOURCE to DEST.\n\nParameters:\n\t-h, shows this help\n\t-u, shows version and author\n\t-i, prompt before overwrite\n\t-r, -R, copy directories recursively\n\t-v, explain what is being done\n";
-	char * const author = " Author: Moraru Ionut\n Version: 1.0.3\n";
-
 	// Reseting getopt internal index;
 	optind = 0;
 
-	while ((o = getopt(argc, argv, "huirRv")) != -1) {
+	while ((o = getopt(argc, argv, "irRv")) != -1) {
 	switch(o) {
-		case 'h':
-			fprintf(stdout, "%s\n",help);
-			return 0;
-		break;
-		case 'u':
-			fprintf(stdout, "%s\n",author);
-			return 0;
-		break;
 		case 'i':
 			i_flag = 1;
 		 break;
@@ -147,4 +136,86 @@ int main(int argc, char **argv) {
 	} else fprintf(stderr, "the universe is gonna implode\n");
 
 	return 0;
+}
+
+/*
+ * Checks to see if the path is a directory;
+ */
+
+int is_dir(const char *dname) {
+        struct stat sbuf;
+
+        if (lstat(dname, &sbuf) == -1) {
+                return 0;
+        }
+
+        if(S_ISDIR(sbuf.st_mode)) {
+                return 1;
+        }
+
+        return 0;
+}
+
+/*
+ * Checks to see if the path exists on disk;
+ */
+
+int exists(char * file) {
+        if(fopen(file, "rb") != NULL) {
+                return 1;
+        }
+
+        return 0;
+}
+
+/*
+ * Copies one file to another;
+ */
+
+int copy_file(char * source, char * destination) {
+        char ch;
+        FILE *in, *out;
+
+        // open SOURCE file;
+        if((in=fopen(source, "rb")) == NULL) {
+                fprintf(stderr, "The SOURCE file does not exists.\n");
+        return -1;
+        }
+
+        // open DESTINATION file;
+        if((out=fopen(destination, "wb")) == NULL) {
+                fprintf(stderr, "Cannot open DESTINATION for writting.\n");
+        return -1;
+        }
+
+        // copy character by character from SOURCE to DESTINATION;
+        while(!feof(in)) {
+                ch = getc(in);
+                if(ferror(in)) {
+                        printf("Read Error.\n");
+                        clearerr(in);
+                break;
+                } else {
+                        if(!feof(in)) putc(ch, out);
+                                if(ferror(out)) {
+                                        printf("Write Error.\n");
+                                        clearerr(out);
+                        break;
+                        }
+                }
+        }
+
+        // cleanup;
+        fclose(in);
+        fclose(out);
+
+        return 1;
+}
+
+/*
+ * Makes a directory;
+ */
+
+int make_dir(char * path, mode_t cmask) {
+        return mkdir(path, cmask);
 }
