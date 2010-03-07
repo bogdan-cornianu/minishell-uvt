@@ -1,0 +1,13 @@
+Usage: rm [OPTION] FILE
+
+Remove (unlink) the FILE.
+
+Parameters:
+	-h, shows this help
+	-u, shows version and author
+	-i, prompt before deletion
+	-r, -R, remove directories recursively
+	-v, explain what is being done
+
+Author: Moraru Ionut\n Version: 1.0.3
+
