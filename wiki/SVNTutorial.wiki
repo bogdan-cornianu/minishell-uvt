@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
-#labels Phase-Implementation,Featured,Deprecated
+#summary Short tutorial on how to use SVN.
+#labels Phase-Implementation,Featured
 
 = To be added =
