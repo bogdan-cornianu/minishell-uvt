@@ -1,4 +1,4 @@
-#summary CSHell compiling guide.
+#summary Minishell-UVT compiling guide.
 #labels Phase-Deploy,Featured
 
 = How-to compile =
