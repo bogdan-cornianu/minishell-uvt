@@ -19,6 +19,8 @@
 #include <string.h>
 #include <dirent.h>
 
+#include <sys/stat.h>
+
 // Declare functions used;
 
 int rm_dir(char *, int, int);
