@@ -1,7 +1,6 @@
 /*
- * Project: Unix Find command
+ *  Unix Find command
  * Author: Rimescu Adi-Ciprian
- * Date: Feb 23 2010
  */
 
 #include <sys/types.h>
