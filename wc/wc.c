@@ -16,7 +16,7 @@ int n_bytes = 0;
 int ci, hv = 0, vv = 0, wv = 0, mv = 0, lv = 0, cv = 0;
 //bool inword = false;
 FILE *fp;
-
+/*read options*/
 while ((ci = getopt (argc, argv, "hvwmlc:")) != -1)
          switch (ci)
            {
@@ -122,27 +122,6 @@ n_words++;
 }
 fclose(fp);
 }
-
-/*
-while ((c = getopt (argc, argv, "cwl")) != -1)
-
-switch (c)
-       {
-       case 'c':
-        printf("\n%ld characters\n",n_chars);
-         break;
-       case 'w':
-        printf("\n%d words\n",n_words);
-         break;
-       case 'l':
-        printf("\n%d lines\n",n_lines);
-	break;
-       default:
-	printf("\nUsage: wc [options] [filename] \nAvailable options: l, w, c\n");
-        abort();
-
-       }
-*/
 
 //if(argc<=2)
 printf("\nCharacters = %ld, bytes = %d, words = %d, lines = %d\n", n_chars, n_bytes, n_words, n_lines);
