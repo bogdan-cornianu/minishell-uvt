@@ -4,12 +4,12 @@
 
 int main(int argc, char **argv) {
 	int i,ci;
-	FILE *fp;
+	FILE *fp;//file pointer
         int j = 0;
         char c;
         int ln = 1,Av = 0, bv = 0, ev = 0, Ev = 0, nv = 0, sv = 0, tv = 0, Tv = 0, hv = 0, vv = 0;
 
-
+/*read options*/
 while ((ci = getopt (argc, argv, "AbeEnstThv:")) != -1)
          switch (ci)
            {

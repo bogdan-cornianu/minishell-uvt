@@ -1,0 +1,3 @@
+quota displays users’ disk usage and limits.  By default only the user quotas are printed.
+Quota  reports  the  quotas  of  all  the filesystems listed in /etc/mtab.  For filesystems that are NFS mounted a call to the rpc.rquotad on the server machine is performed to get the information.
+
