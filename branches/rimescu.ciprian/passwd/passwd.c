@@ -116,9 +116,7 @@ int main(int argc, char *argv[])
 	if ((status = init_locales(PRG_NAME)))
 		return status;
 
-	set_author_information(_(&quot;Written by David Weinehall, &quot;
-				 &quot;Barry deFreese, &quot;
-				 &quot;and Ben Asselstine.\n&quot;));
+	
 
 	/* Parse command line */
 	if ((status = argp_parse(&amp;argp, argc, argv, 0, 0, &amp;args))) {
