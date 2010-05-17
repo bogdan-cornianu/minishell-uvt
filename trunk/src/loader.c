@@ -26,12 +26,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-// Require API file
-#include "API.c"
-
-// Require file to include commands
-#include "include_comands.h"
-
 #define MAX_ARGS 20
 #define MAX_COMS 20
 #define ARGS_DELIMITER " "
@@ -49,6 +43,12 @@ int com_help(),
 void signal_handler(int);
 
 int com_exe(char *);
+
+// Require API file
+#include "API.c"
+
+// Require file to include commands
+#include "include_commands.h"
 
 // Global variables used in program
 int argcount;
