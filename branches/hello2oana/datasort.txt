@@ -1,0 +1,5 @@
+
+john 22 black 
+ana 21 pink 
+joly 24 white 
+jane 20 blue  
