@@ -12,10 +12,7 @@
 **
 ********************************************************************************/
 
-#include <stdio.h>
-#include <stdlib.h>
-
-int main(int argc, char **argv) {
+int com_logname(int argc, char **argv) {
 	// Create buffer to hold login name;
 	char buffer[128];
 
