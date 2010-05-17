@@ -1,0 +1,9 @@
+========================================================
+cat - concatenate files and print on the standard output
+========================================================
+
+Options: -n Number all output lines
+	 -T Display TAB characters as ^I
+	 -E Display $ at end of each line
+	 -h Display this help
+	 -v Show version

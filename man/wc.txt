@@ -1,0 +1,10 @@
+=======================================================
+wc - print newline, word, and byte counts for each file
+=======================================================
+
+Options: -w Count words
+	 -l Count lines
+	 -c Count bytes
+	 -m Count characters
+	 -h Show this help
+	 -v Show version

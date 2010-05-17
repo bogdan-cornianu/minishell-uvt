@@ -1,0 +1,7 @@
+gunzip takes a list of files on its command line and replaces each file
+       whose  name  ends with .gz, -gz, .z, -z, _z or .Z and which begins with
+       the correct magic number with an uncompressed file without the original
+       extension.  gunzip also recognizes the special extensions .tgz and .taz
+       as shorthands for .tar.gz and .tar.Z respectively.   When  compressing,
+       gzip  uses the .tgz extension if necessary instead of truncating a file
+       with a .tar extension.

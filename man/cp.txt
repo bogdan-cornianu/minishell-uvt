@@ -1,0 +1,14 @@
+Usage: cp [OPTION] SOURCE DEST
+
+Copy SOURCE to DEST.
+
+Parameters:
+	-h, shows this help
+	-u, shows version and author
+	-i, prompt before overwrite
+	-r, -R, copy directories recursively
+	-v, explain what is being done;
+
+Author: Moraru Ionut
+
+Version: 1.0.3
