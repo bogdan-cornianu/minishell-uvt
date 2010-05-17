@@ -1,0 +1,2 @@
+quota  displays users’ disk usage and limits.  By default only the user
+       quotas are printed.
