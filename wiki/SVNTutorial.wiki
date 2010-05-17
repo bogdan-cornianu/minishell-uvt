@@ -1,4 +1,4 @@
 #summary Short tutorial on how to use SVN.
 #labels Phase-Implementation,Featured
 
-= To be added =
+Please see http://subversion.apache.org/packages.html.
