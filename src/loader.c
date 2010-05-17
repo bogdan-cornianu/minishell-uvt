@@ -39,12 +39,10 @@
 // Functions declaration
 int com_help(),
 	com_printenv(int, char**),
-	com_pwd(int, char**),
 	com_cp(int, char**),
 	com_ls(int, char**),
 	com_dir(int, char**),
 	com_cd(int, char**),
-	com_mkdir(int, char**),
 	com_rm(int, char**);
 
 // Catch signal;
@@ -68,17 +66,11 @@ typedef struct {
 COMMAND cmd[] = {
                 {"?", com_help, "Display the help."},
                 {"printenv", com_printenv, "Print enviroment variables."},
-                {"exit", com_exit, "Exit the shell."},
-                {"pwd", com_pwd, "Print working directory."},
                 {"ls", com_ls, "List information about the FILE."},
                 {"cp", com_cp, "Copies SOURCE to DESTINATION."},
                 {"dir", com_dir, "List information about the FILE."},
-                {"yes", com_yes, "Repeatedly output a line with all specified STRING, or 'y'."},
                 {"cd", com_cd, "Change the current directory."},
-                {"mkdir", com_mkdir, "Create a DIRECTORY, if it does not already exist."},
-                {"rmdir", com_rmdir, "Remove the DIRECTORY, if it is empty."},
                 {"rm", com_rm, "Remove (unlink) the FILE."},
-                {"chmod", com_chmod, "Change the mode of each FILE to MODE."},
                 { (char *)NULL, (Function *)NULL, (char *)NULL }
                 };
 

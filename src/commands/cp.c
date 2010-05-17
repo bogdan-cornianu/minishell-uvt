@@ -12,31 +12,7 @@
 **
 ********************************************************************************/
 
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <dirent.h>
-
-#include <pwd.h>
-#include <grp.h>
-#include <time.h>
-#include <locale.h>
-#include <langinfo.h>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-
-// Declare functions used;
-int is_dir(const char*);
-int exists(char *);
-int copy_file(char *, char *);
-int make_dir(char *, mode_t);
-
-// Main function;
-int main(int argc, char **argv) {
+int com_cp(int argc, char **argv) {
 	// Definition of local variables;
 	int o;
 	char *source = NULL, *dest = NULL;
@@ -136,86 +112,4 @@ int main(int argc, char **argv) {
 	} else fprintf(stderr, "the universe is gonna implode\n");
 
 	return 0;
-}
-
-/*
- * Checks to see if the path is a directory;
- */
-
-int is_dir(const char *dname) {
-        struct stat sbuf;
-
-        if (lstat(dname, &sbuf) == -1) {
-                return 0;
-        }
-
-        if(S_ISDIR(sbuf.st_mode)) {
-                return 1;
-        }
-
-        return 0;
-}
-
-/*
- * Checks to see if the path exists on disk;
- */
-
-int exists(char * file) {
-        if(fopen(file, "rb") != NULL) {
-                return 1;
-        }
-
-        return 0;
-}
-
-/*
- * Copies one file to another;
- */
-
-int copy_file(char * source, char * destination) {
-        char ch;
-        FILE *in, *out;
-
-        // open SOURCE file;
-        if((in=fopen(source, "rb")) == NULL) {
-                fprintf(stderr, "The SOURCE file does not exists.\n");
-        return -1;
-        }
-
-        // open DESTINATION file;
-        if((out=fopen(destination, "wb")) == NULL) {
-                fprintf(stderr, "Cannot open DESTINATION for writting.\n");
-        return -1;
-        }
-
-        // copy character by character from SOURCE to DESTINATION;
-        while(!feof(in)) {
-                ch = getc(in);
-                if(ferror(in)) {
-                        printf("Read Error.\n");
-                        clearerr(in);
-                break;
-                } else {
-                        if(!feof(in)) putc(ch, out);
-                                if(ferror(out)) {
-                                        printf("Write Error.\n");
-                                        clearerr(out);
-                        break;
-                        }
-                }
-        }
-
-        // cleanup;
-        fclose(in);
-        fclose(out);
-
-        return 1;
-}
-
-/*
- * Makes a directory;
- */
-
-int make_dir(char * path, mode_t cmask) {
-        return mkdir(path, cmask);
 }
