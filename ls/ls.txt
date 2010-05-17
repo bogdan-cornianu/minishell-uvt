@@ -1,0 +1,13 @@
+Usage: ls [OPTION] FILE
+
+List information about the FILE.
+
+Parameters:
+	-l, use a long listing format
+	-s, print the size of each file, in blocks
+	-a, do not ignore entries starting with .
+	-F, append indicator (one of */=>@|) to entries
+
+Author: Moraru Ionut
+
+Version: 1.0.8
