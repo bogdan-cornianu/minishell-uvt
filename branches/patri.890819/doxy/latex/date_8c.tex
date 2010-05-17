@@ -1,0 +1,75 @@
+\hypertarget{date_8c}{
+\section{date.c File Reference}
+\label{date_8c}\index{date.c@{date.c}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$time.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{date_8c_adec192ffd1a19748cbfaff634317b905}{date\_\-default} (int argcounter, char $\ast$$\ast$argvector)
+\begin{DoxyCompactList}\small\item\em function executed to get and display the curent date and time \item\end{DoxyCompactList}\item 
+int \hyperlink{date_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em command main function \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Patricia Minica, anul 2 Informatica -\/ Engleza 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.0
+\end{DoxyVersion}
+displays the curent date and time 
+
+\subsection{Function Documentation}
+\hypertarget{date_8c_adec192ffd1a19748cbfaff634317b905}{
+\index{date.c@{date.c}!date\_\-default@{date\_\-default}}
+\index{date\_\-default@{date\_\-default}!date.c@{date.c}}
+\subsubsection[{date\_\-default}]{\setlength{\rightskip}{0pt plus 5cm}int date\_\-default (int {\em argcounter}, \/  char $\ast$$\ast$ {\em argvector})}}
+\label{date_8c_adec192ffd1a19748cbfaff634317b905}
+
+
+function executed to get and display the curent date and time 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em argcounter}]-\/ calling arguments counter \item[{\em $\ast$$\ast$argvector}]-\/ calling arguments vector\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 
+\end{DoxyReturn}
+
+
+\begin{DoxySeeAlso}{See also}
+get curent date and time in struct buffer
+
+print current date and time in shell like format
+\end{DoxySeeAlso}
+
+
+\hypertarget{date_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{date.c@{date.c}!main@{main}}
+\index{main@{main}!date.c@{date.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{date_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+command main function 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em argc}]-\/ calling arguments counter \item[{\em $\ast$$\ast$argv}]-\/ calling arguments vector\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success or a positive int on failure 
+\end{DoxyReturn}
+
+
+\begin{DoxySeeAlso}{See also}
+run command to display date and time only if function is called with no args 
+
+\hyperlink{date_8c_adec192ffd1a19748cbfaff634317b905}{date\_\-default} (argc, argv);
+\end{DoxySeeAlso}
+
+
