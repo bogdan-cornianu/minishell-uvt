@@ -1,14 +1,13 @@
-#include &lt;argp.h&gt;
-#include &lt;errno.h&gt;
-#include &lt;stdio.h&gt;
+#include <argp.h>
+#include <errno.h>
+#include <stdio.h>
 
-#include &quot;misc.h&quot;
-#include &quot;sysutils.h&quot;
-#include &quot;libpasswd.h&quot;
+#include <misc.h>
+#include <libpasswd.h>
 
-#define PRG_NAME &quot;passwd&quot;	/**&lt; Name shown by --help etc */
+#define PRG_NAME passwd;	/** Name shown by --help etc */
 
-extern const char *progname;	/**&lt; Used to store the name of the program */
+extern const char *progname;	/** Used to store the name of the program */
 
 /** Address to send bug-reports to */
 const char *argp_program_bug_address = PACKAGE_BUGREPORT;
