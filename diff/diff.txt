@@ -1,0 +1,23 @@
+DIFF(1)                          User Commands                         DIFF(1)
+
+NAME
+       diff - compare files line by line
+
+SYNOPSIS
+       diff [OPTION]... FILES
+
+DESCRIPTION
+       Compare files line by line.
+
+       -i  --ignore-case
+              Ignore case differences in file contents.
+
+       --ignore-file-name-case
+              Ignore case when comparing file names.
+
+       --no-ignore-file-name-case
+              Consider case when comparing file names.
+
+       -E  --ignore-tab-expansion
+              Ignore changes due to tab expansion.
+
