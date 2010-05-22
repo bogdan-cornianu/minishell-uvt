@@ -1,10 +1,28 @@
+/**
+* @cal.c
+* @author Cornianu Bogdan-Iancu <cornianu.bogdan@gmail.com>
+* @version 1.0.0.0
+*
+* @section DESCRIPTION
+*
+* Simple calendar viewer
+*
+*/
 
 #include<stdio.h>
 
 #define TRUE    1
 #define FALSE   0
 
+/**
+* Months length in days
+*
+*/
 int days_in_month[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+/**
+* Months as caracters
+*
+*/
 char *months[]=
 {
 	" ",
@@ -21,7 +39,11 @@ char *months[]=
 	"\n\n\nNovember",
 	"\n\n\nDecember"
 };
-
+/**
+* Determine the day code of provided year
+* @param year
+* @return daycode
+*/
 int determinedaycode(int year)
 {
 	int daycode;
@@ -33,7 +55,11 @@ int determinedaycode(int year)
 	daycode = (year + d1 - d2 + d3) %7;
 	return daycode;
 }
-
+/**
+* Determine if parameter is a leap year
+* @param year
+* @return TRUE or FALSE
+*/
 int determineleapyear(int year)
 {
 	if(year% 4 == FALSE && year%100 != FALSE || year%400 == FALSE)
@@ -47,7 +73,10 @@ int determineleapyear(int year)
 		return FALSE;
 	}
 }
-
+/**
+* Print the calendar for the specified year having the provided daycode
+* @param year, daycode
+*/
 void calendar(int year, int daycode)
 {
 	int month, day;

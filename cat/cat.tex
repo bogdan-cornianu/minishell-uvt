@@ -6,29 +6,31 @@
 \usepackage{babel}
 
 \begin{document}
---------------------------------------------------------------------------------
+\begin{center}
+\textsf{\textbf{\Large Cat}}
+\par\end{center}{\Large \par}
 
-CAT - concatenate files and print on the standard output
+\textsf{\textbf{Description:}}
 
----------------------------------------------------------------------------------
+Concatenate files and print on the standard output
 
-CAT begins by reading the arguments list. At least a file name must
-be specified. For each possible option there is a variable that is
-equal to 1 if the according option is selected and 0 otherwise.
+\textsf{\textbf{Arguments:}}
 
-Numbering the lines - if option 'n' is selected, CAT will count the
-number of occurrences for '\textbackslash{}n' and display that value
-as the number of lines.
+Name of the file to be printed
 
-Printing version information - if option 'v' is selected, CAT will
-print the version information.
+\textsf{\textbf{Usage:}}
 
-Printing the help menu - if option 'h' is selected, CAT will print
-a help menu with all the options available.
+cal {[}\textsf{\textit{filename}}{]}
 
-Show tabs - if option 'T' is selected then all occurrences of '\textbackslash{}t'
-in the text will be replaced by '\textasciicircum{}I'.
+\textsf{\textbf{Sample runs:}}
 
-Show '\$' at the end of each line - if option 'E' is selected, then
-at the end of each line a '\$' character will be printed.
+\textsf{1) ./cat cat.txt }
+
+\textsf{======================================================== }
+
+\textsf{cat - concatenate files and print on the standard output ========================================================}
+
+\textsf{Options: -n Number all output lines -T Display TAB characters
+as \textasciicircum{}I -E Display \$ at end of each line -h Display
+this help -v Show version }
 \end{document}

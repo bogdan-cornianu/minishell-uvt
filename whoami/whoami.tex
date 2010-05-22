@@ -6,22 +6,29 @@
 \usepackage{babel}
 
 \begin{document}
----------------------------------------------
+\begin{center}
+\textsf{\textbf{\Large Whoami}}
+\par\end{center}{\Large \par}
 
-WHOAMI - print effective userid
+\textsf{\textbf{Description:}}
 
----------------------------------------------
+Print effective userid
 
-WHOAMI uses the GETEUID and GETPWUID system calls. GETPWUID receives
-as an argument the GETEUID return value.
+\textsf{\textbf{Arguments:}}
 
-GETEUID - returns the real user ID of the current process.
+N/A
 
-GETPWUID - returns a pointer to a structure containing the broken-out
-fields of the record in the password database that matches the user
-ID uid.
+\textsf{\textbf{Usage:}}
 
-pwd is declared as \textbf{struct passwd {*} }and then we access the
-name field by using pwd->pw\_name and we print it to the screen. The
-pwd->pw\_name represents the effective userid.
+whoami
+
+\textsf{\textbf{Sample runs:}}
+
+\textsf{1) whoami}
+
+\textsf{bogdan}
+
+2) whoami
+
+root
 \end{document}

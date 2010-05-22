@@ -1,3 +1,13 @@
+/**
+* @quota.c
+* @author Cornianu Bogdan-Iancu <cornianu.bogdan@gmail.com>
+* @version 1.0.0.0
+*
+* @section DESCRIPTION
+*
+* Displays users’ disk usage and limits
+*
+*/
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -5,10 +15,10 @@
 
 int main(int argc, char** argv)
 {
-//Get current user ID
+/**Get current user ID*/
 int uid = getuid();
 const char* block_device = argv[1];
-//if_dqblk structure
+/**if_dqblk structure*/
 struct if_dqblk {                     
             u_int64_t dqb_bhardlimit;     
             u_int64_t dqb_bsoftlimit;     
@@ -22,12 +32,12 @@ struct if_dqblk {
     };            
 
 struct if_dqblk dq;
-    //Get quota information
+    /**Get quota information*/
     if (quotactl(QCMD(Q_GETQUOTA, USRQUOTA), block_device, uid, (caddr_t) & dq)) {
         perror("quotactl");
         return 1;
     } else {
-	//Display quota information
+	/**Display quota information*/
         printf("Device: %s\n", block_device);
         printf
             ("Current space:  %7.1qu \tSoft limit: %7.1qu  \tHard limit: %7.1qu \tGrace period: %qu\n",
