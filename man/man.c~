@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <unistd.h>
+
+int main(int argc, char **argv) 
+{
+
+  	FILE *fp;//file pointer
+	char c;
+
+	fp = fopen(argv[1], "r");
+
+        if (fp == NULL)
+        {
+            fprintf(stderr, "File not found!\n");
+            //exit;
+        }
+	else
+	
+	while ((c = fgetc(fp)) != EOF)
+        fputc(c, stdout);
+
+	close(fp);
+	
+return 0;
+
+}        
+	
