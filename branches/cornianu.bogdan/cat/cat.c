@@ -1,3 +1,13 @@
+/**
+* @cat.c
+* @author Cornianu Bogdan-Iancu <cornianu.bogdan@gmail.com>
+* @version 1.0.0.0
+*
+* @section DESCRIPTION
+*
+* Concatenate files to standard output
+*
+*/
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
@@ -9,7 +19,9 @@ int main(int argc, char **argv) {
         char c;
         int ln = 1,Av = 0, bv = 0, ev = 0, Ev = 0, nv = 0, sv = 0, tv = 0, Tv = 0, hv = 0, vv = 0;
 
-/*read options*/
+/**
+* Read options from the command line
+*/
 while ((ci = getopt (argc, argv, "AbeEnstThv:")) != -1)
          switch (ci)
            {
@@ -23,9 +35,11 @@ while ((ci = getopt (argc, argv, "AbeEnstThv:")) != -1)
              ev = 1;
              break;
 	case 'E':
+	/** Show $ at end of lines*/
              Ev = 1;
              break;
 	case 'n':
+	/** Number the lines*/
              nv = 1;
              break;
 	case 's':
@@ -35,12 +49,15 @@ while ((ci = getopt (argc, argv, "AbeEnstThv:")) != -1)
              tv = 1;
              break;
 	case 'T':
+	/** Show tabs*/
              Tv = 1;
              break;
 	case 'h':
+	/** Show help*/
              hv = 1;
              break;
 	case 'v':
+	/** Show version*/
              vv = 1;
              break;
 	 default: printf("Unknown argument(s)!");

@@ -1,3 +1,13 @@
+/**
+* @wc.c
+* @author Cornianu Bogdan-Iancu <cornianu.bogdan@gmail.com>
+* @version 1.0.0.0
+*
+* @section DESCRIPTION
+*
+* Print newline, word, and byte counts for each file
+*
+*/
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -16,26 +26,32 @@ int n_bytes = 0;
 int ci, hv = 0, vv = 0, wv = 0, mv = 0, lv = 0, cv = 0;
 //bool inword = false;
 FILE *fp;
-/*read options*/
+/** Read options from stdin */
 while ((ci = getopt (argc, argv, "hvwmlc:")) != -1)
          switch (ci)
            {
            case 'h':
+	/** Show help*/
              hv = 1;
              break;
            case 'v':
+	/** Show version information*/
              vv = 1;
              break;
 	case 'w':
+	/** Show word count*/
              wv = 1;
              break;
 	case 'm':
+	/** Show character count*/
              mv = 1;
              break;
 	case 'l':
+	/** Show lines count*/
              lv = 1;
              break;
 	case 'c':
+	/** Show bytes count*/
              cv = 1;
              break;
 	default: printf("Unknown option!");

@@ -1,3 +1,13 @@
+/**
+* @man.c
+* @author Cornianu Bogdan-Iancu <cornianu.bogdan@gmail.com>
+* @version 1.0.0.0
+*
+* @section DESCRIPTION
+*
+* Display help for specified commands
+*
+*/
 #include <stdio.h>
 #include <unistd.h>
 

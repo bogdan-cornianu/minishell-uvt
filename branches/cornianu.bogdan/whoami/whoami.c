@@ -1,3 +1,13 @@
+/**
+* @whoami.c
+* @author Cornianu Bogdan-Iancu <cornianu.bogdan@gmail.com>
+* @version 1.0.0.0
+*
+* @section DESCRIPTION
+*
+* Print effective userid
+*
+*/
 #include <stdlib.h>
 #include <pwd.h>
 #include <stdio.h>
@@ -18,7 +28,7 @@ int main(int argc, char *argv[])
              vv = 1;
              break;
 	default: printf("Unknown option!");
-  
+  }
   uid = geteuid ();
   pw = getpwuid (uid);
   if (pw)

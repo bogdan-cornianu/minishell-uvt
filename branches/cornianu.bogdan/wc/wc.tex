@@ -6,24 +6,25 @@
 \usepackage{babel}
 
 \begin{document}
--------------------------------------------------------------------------------------------------------------
+\begin{center}
+\textsf{\textbf{\Large Wc}}
+\par\end{center}{\Large \par}
 
-WC - print newline, word, and byte counts for an opened or text from
-stdin file
+\textsf{\textbf{Description:}}
 
--------------------------------------------------------------------------------------------------------------
+Print newline, word, and byte counts for each file
 
-WC begins by reading the arguments list. If a filename is not specified,
-WC will ask for text to be inputed from stdin. For each possible option
-there is a variable that is equal to 1 if the according option is
-selected and 0 otherwise.
+\textsf{\textbf{Arguments:}}
 
-fp - represents the status of the opened file. If it is equal to NULL
-then text will be read from stdin.
+Options, filename
 
-The text(either from file or from stdin) is traversed by WC and according
-to the selected options, the appropiate variables are incremented
-with lines count, words count, bytes count or characters count. Once
-the text has been traversed, WC will display a text line containing
-the results for each selected option.
+\textsf{\textbf{Usage:}}
+
+wc {[}options{]} {[}filename{]}
+
+\textsf{\textbf{Sample runs:}}
+
+\textsf{1) ./wc -l wc.txt}
+
+\textsf{Characters = 0, bytes = 0, words = 0, lines = 10}
 \end{document}
