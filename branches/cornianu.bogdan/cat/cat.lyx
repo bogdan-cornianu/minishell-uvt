@@ -1,0 +1,90 @@
+#LyX file created by tex2lyx 1.6.5
+\lyxformat 264
+\begin_document
+\begin_header
+\textclass article
+\language english
+\inputencoding latin9
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+
+--------------------------------------------------------------------------------
+\end_layout
+
+\begin_layout Standard
+
+CAT - concatenate files and print on the standard output
+\end_layout
+
+\begin_layout Standard
+
+---------------------------------------------------------------------------------
+\end_layout
+
+\begin_layout Standard
+
+CAT begins by reading the arguments list. At least a file name must be specified. For each possible option there is a variable that is equal to 1 if the according option is selected and 0 otherwise.
+\end_layout
+
+\begin_layout Standard
+
+Numbering the lines - if option 'n' is selected, CAT will count the number of occurrences for '
+\backslash
+n' and display that value as the number of lines.
+\end_layout
+
+\begin_layout Standard
+
+Printing version information - if option 'v' is selected, CAT will print the version information.
+\end_layout
+
+\begin_layout Standard
+
+Printing the help menu - if option 'h' is selected, CAT will print a help menu with all the options available.
+\end_layout
+
+\begin_layout Standard
+
+Show tabs - if option 'T' is selected then all occurrences of '
+\backslash
+t' in the text will be replaced by '^I'.
+\end_layout
+
+\begin_layout Standard
+
+Show '$' at the end of each line - if option 'E' is selected, then at the end of each line a '$' character will be printed. 
+\end_layout
+
+\end_body
+\end_document
