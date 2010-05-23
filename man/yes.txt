@@ -1,9 +1,0 @@
-Usage: yes OUTPUT
-
-Outputs 'y', forever
-
-Parameters: none
-
-Author: Moraru Ionut
-
-Version: 1.0.0
