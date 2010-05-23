@@ -6,7 +6,7 @@
 
 int com_echo (int argcounter, char **argvector);
 
-int main (int argc, char **argv) {
+int com_echo (int argc, char **argv) {
 
     optind = 0;
     int o;

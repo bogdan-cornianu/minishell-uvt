@@ -5,10 +5,10 @@
 
 
 struct x {
-	char one[datalen];
-	char two[datalen];
-	char thr[datalen];
-} data[M];
+	char one[100];
+	char two[100];
+	char thr[100];
+} data[100];
 
 int sort_default (int argcounter, char **argvector);
 
@@ -55,9 +55,9 @@ int sort_default (int argcounter, char **argvector)
 
     int n = 0, i = 0, j, c;
     char tempstr[100];
-    char keyone[datalen];
-    char keytwo[datalen];
-    char keythr[datalen];
+    char keyone[100];
+    char keytwo[100];
+    char keythr[100];
 
 	while ((c = fgetc (inFile)) != EOF)
 	{

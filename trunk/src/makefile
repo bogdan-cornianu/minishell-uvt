@@ -1,2 +1,2 @@
 bin: loader.c
-	gcc -lreadline -o minishell-uvt loader.c
+	gcc -B /usr/local/zlib/ -lreadline -o minishell-uvt loader.c
