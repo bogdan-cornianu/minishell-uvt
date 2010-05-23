@@ -1,9 +1,0 @@
-Usage: logname
-
-Print user login name.
-
-No parameters.
-
-Author: Moraru Ionut
-
-Version: 1.0.0
