@@ -22,6 +22,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/quota.h>
+#include <sys/utsname.h>
 
 #include <readline/readline.h>
 #include <readline/history.h>
