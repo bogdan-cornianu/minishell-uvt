@@ -37,7 +37,8 @@ int com_help(),
 	com_ls(int, char**),
 	com_dir(int, char**),
 	com_cd(int, char**),
-	com_rm(int, char**);
+	com_rm(int, char**),
+	com_uname(int, char**);
 
 // Catch signal;
 void signal_handler(int);
@@ -71,6 +72,7 @@ COMMAND cmd[] = {
                 {"dir", com_dir, "List information about the FILE."},
                 {"cd", com_cd, "Change the current directory."},
                 {"rm", com_rm, "Remove (unlink) the FILE."},
+				{"uname", com_uname, "..."},
                 { (char *)NULL, (Function *)NULL, (char *)NULL }
                 };
 
