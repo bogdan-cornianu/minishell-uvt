@@ -1,0 +1,21 @@
+NAME
+       xargs - build and execute command lines from standard input
+
+SYNOPSIS
+       xargs  [-0prtx]  [-E  eof-str] [-e[eof-str]] [--eof[=eof-str]] [--null]
+       [-d delimiter] [--delimiter delimiter]  [-I  replace-str]  [-i[replace-
+       str]]    [--replace[=replace-str]]   [-l[max-lines]]   [-L   max-lines]
+       [--max-lines[=max-lines]] [-n max-args] [--max-args=max-args] [-s  max-
+       chars]  [--max-chars=max-chars]  [-P max-procs] [--max-procs=max-procs]
+       [--interactive]      [--verbose]      [--exit]      [--no-run-if-empty]
+       [--arg-file=file]   [--show-limits]   [--version]   [--help]   [command
+       [initial-arguments]]
+
+DESCRIPTION
+       This manual page documents the GNU version of xargs.  xargs reads items
+       from  the  standard  input, delimited by blanks (which can be protected
+       with double or single quotes or a backslash) or newlines, and  executes
+       the  command (default is /bin/echo) one or more times with any initial-
+       arguments followed by items read from standard input.  Blank  lines  on
+       the standard input are ignored.
+

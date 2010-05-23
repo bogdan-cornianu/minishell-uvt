@@ -1,0 +1,21 @@
+NAME
+       sdiff - side-by-side merge of file differences
+
+SYNOPSIS
+       sdiff [OPTION]... FILE1 FILE2
+
+DESCRIPTION
+       Side-by-side merge of file differences.
+
+       -o FILE  --output=FILE
+              Operate interactively, sending output to FILE.
+
+       -i  --ignore-case
+              Consider upper- and lower-case to be the same.
+
+       -E  --ignore-tab-expansion
+              Ignore changes due to tab expansion.
+
+       -b  --ignore-space-change
+              Ignore changes in the amount of white space.
+
