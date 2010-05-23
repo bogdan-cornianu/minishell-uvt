@@ -11,6 +11,7 @@
 #include <assert.h>
 #include <stdbool.h>
 #include <ctype.h>
+#include <zlib.h>
 
 #include <pwd.h>
 #include <grp.h>
@@ -39,7 +40,20 @@ int com_help(),
 	com_dir(int, char**),
 	com_cd(int, char**),
 	com_rm(int, char**),
-	com_uname(int, char**);
+	com_apropos(int, char**),
+	com_chmod(int, char**),
+	com_clear(int, char**),
+	com_date(int, char**),
+	com_echo(int, char**),
+	com_gzip(int, char**),
+	com_mkdir(int, char**),
+	com_sleep(int, char**),
+	com_sort(int, char**),
+	com_time(int, char**),
+	com_uname(int, char**),
+	com_umask(int, char**),
+	com_whatis(int, char**),
+	com_zcat(int, char**);
 
 // Catch signal;
 void signal_handler(int);
@@ -73,7 +87,20 @@ COMMAND cmd[] = {
                 {"dir", com_dir, "List information about the FILE."},
                 {"cd", com_cd, "Change the current directory."},
                 {"rm", com_rm, "Remove (unlink) the FILE."},
-				{"uname", com_uname, "..."},
+				{"apropos", com_apropos, "apropos"},
+				{"chmod", com_chmod, "chmod"},
+				{"clear", com_clear, "clear"},
+				{"date", com_date, "date"},
+				{"echo", com_echo, "echo"},
+				{"gzip", com_gzip, "gzip"},
+				{"chmod", com_mkdir, "chmod"},
+				{"sleep", com_sleep, "sleep"},
+				{"sort", com_sort, "sort"},
+				{"time", com_time, "time"},
+				{"uname", com_uname, "uname"},
+				{"umask", com_umask, "umask"},
+				{"whatis", com_whatis, "whatis"},
+				{"zcat", com_zcat, "zcat"},
                 { (char *)NULL, (Function *)NULL, (char *)NULL }
                 };
 
