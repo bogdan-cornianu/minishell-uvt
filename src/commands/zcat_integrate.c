@@ -3,6 +3,9 @@
  * zcat command
  */
 
+#define SET_BINARY_MODE(file)
+
+#define CHUNK 16384
 
 int zcat_default (int argcounter, char **argvector);
 

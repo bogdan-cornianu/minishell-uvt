@@ -6,7 +6,7 @@
 
 int time_default (int argcounter, char **argvector);
 
-int com_tim(int argc, char **argv) {
+int com_time(int argc, char **argv) {
 
     char **argvector = (char**)malloc (MAX_ARGS * sizeof (char *));
     int argcounter;
