@@ -1,0 +1,99 @@
+\hypertarget{zcat_8c}{
+\section{zcat.c File Reference}
+\label{zcat_8c}\index{zcat.c@{zcat.c}}
+}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$stdlib.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$assert.h$>$}\par
+{\ttfamily \#include $<$unistd.h$>$}\par
+{\ttfamily \#include $<$zlib.h$>$}\par
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{zcat_8c_a714fe40d73494a577de3127a79ea24a2}{SET\_\-BINARY\_\-MODE}(file)
+\item 
+\#define \hyperlink{zcat_8c_a25022864dfc8ec428e7128282e57b136}{CHUNK}~16384
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{zcat_8c_a0ee5b3e403fc080f0478b06910155e6e}{zcat\_\-default} (int argcounter, char $\ast$$\ast$argvector)
+\begin{DoxyCompactList}\small\item\em function executed decompress a file \item\end{DoxyCompactList}\item 
+int \hyperlink{zcat_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em command main function \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Oana Munteanu, anul 2 Informatica -\/ Engleza 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.0
+\end{DoxyVersion}
+decompress file in argument vector 
+
+\subsection{Define Documentation}
+\hypertarget{zcat_8c_a25022864dfc8ec428e7128282e57b136}{
+\index{zcat.c@{zcat.c}!CHUNK@{CHUNK}}
+\index{CHUNK@{CHUNK}!zcat.c@{zcat.c}}
+\subsubsection[{CHUNK}]{\setlength{\rightskip}{0pt plus 5cm}\#define CHUNK~16384}}
+\label{zcat_8c_a25022864dfc8ec428e7128282e57b136}
+\hypertarget{zcat_8c_a714fe40d73494a577de3127a79ea24a2}{
+\index{zcat.c@{zcat.c}!SET\_\-BINARY\_\-MODE@{SET\_\-BINARY\_\-MODE}}
+\index{SET\_\-BINARY\_\-MODE@{SET\_\-BINARY\_\-MODE}!zcat.c@{zcat.c}}
+\subsubsection[{SET\_\-BINARY\_\-MODE}]{\setlength{\rightskip}{0pt plus 5cm}\#define SET\_\-BINARY\_\-MODE(file)}}
+\label{zcat_8c_a714fe40d73494a577de3127a79ea24a2}
+
+
+\subsection{Function Documentation}
+\hypertarget{zcat_8c_a3c04138a5bfe5d72780bb7e82a18e627}{
+\index{zcat.c@{zcat.c}!main@{main}}
+\index{main@{main}!zcat.c@{zcat.c}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (int {\em argc}, \/  char $\ast$$\ast$ {\em argv})}}
+\label{zcat_8c_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+command main function 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em argc}]-\/ calling arguments counter \item[{\em $\ast$$\ast$argv}]-\/ calling arguments vector\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success or a positive int on failure 
+\end{DoxyReturn}
+
+
+\begin{DoxySeeAlso}{See also}
+run command if no arguments specified 
+
+\hyperlink{zcat_8c_a0ee5b3e403fc080f0478b06910155e6e}{zcat\_\-default} (argc, argv);
+\end{DoxySeeAlso}
+
+
+\hypertarget{zcat_8c_a0ee5b3e403fc080f0478b06910155e6e}{
+\index{zcat.c@{zcat.c}!zcat\_\-default@{zcat\_\-default}}
+\index{zcat\_\-default@{zcat\_\-default}!zcat.c@{zcat.c}}
+\subsubsection[{zcat\_\-default}]{\setlength{\rightskip}{0pt plus 5cm}int zcat\_\-default (int {\em argcounter}, \/  char $\ast$$\ast$ {\em argvector})}}
+\label{zcat_8c_a0ee5b3e403fc080f0478b06910155e6e}
+
+
+function executed decompress a file 
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em argcounter}]-\/ calling arguments counter \item[{\em $\ast$$\ast$argvector}]-\/ calling arguments vector\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on success or a positive int on failure 
+\end{DoxyReturn}
+
+
+\begin{DoxySeeAlso}{See also}
+Decompress from file source to file dest until stream ends or EOF. inf() returns Z\_\-OK on success, Z\_\-MEM\_\-ERROR if memory could not be allocated for processing, Z\_\-DATA\_\-ERROR if the deflate \hyperlink{sort_8c_a40817a93bb761f0453417ec953820444}{data} is invalid or incomplete, Z\_\-VERSION\_\-ERROR if the version of zlib.h and the version of the library linked do not match, or Z\_\-ERRNO if there is an error reading or writing the files.
+
+decompress until deflate stream ends or end of file
+
+clean up and return 
+\end{DoxySeeAlso}
+
+
