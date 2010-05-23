@@ -1,156 +1,476 @@
-/*******************************************************************************
- **
- ** Module Name: ls.c
- **
- ** Project Name: Minishell-UVT
- **
- ********************************************************************************
- **
- ** Created By: Moraru Ionut (morion4000)
- **
- ** Description: Implementation of the UNIX ls command;
- **
- ********************************************************************************/
+/**
+ * @file ls.c
+ * @author  Patricia Minica, anul 2 Informatica - Engleza
+ * @version 1.0
+ *
+ * display directory content
+ */
 
-// Main function;
-int com_ls(int argc, char **argv) {
-	// Definition of local variables;
-	DIR *dir;
-	struct dirent *dp;
-	struct stat     statbuf;
-	struct passwd  *pwd;
-	struct group   *grp;
-	struct tm      *tm;
-	char            datestring[256];
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
+#include <limits.h>
+#include <dirent.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <pwd.h>
+#include <grp.h>
 
-	char * dir_path = ".";
+/**
+ * list curent directory content (no other info)
+ * 
+ * @param dirname   - directory to be listed
+ * 	
+ * @return 0 on success or a positive int on failure
+ */
+int ext_ls_default(char * dirname);
 
-	int l_flag = 0, s_flag = 0, a_flag = 0, F_flag = 0;
-	int o;
+/**
+ * list curent directory content (with . and ..)
+ * 
+ * @param dirname   - directory to be listed
+ * 	
+ * @return 0 on success or a positive int on failure
+ */
+int ext_ls_a(char * dirname);
 
-	// Reseting getopt internal index;
-	optind = 0;
+/**
+ * list curent directory content (with formating options)
+ * 
+ * @param dirname   - directory to be listed
+ * 	
+ * @return 0 on success or a positive int on failure
+ */
+int ext_ls_F(char * dirname);
 
-	while ((o = getopt(argc, argv, "lsaF")) != -1) {
-	 switch(o) {
-		case 'l':
-			l_flag = 1;
-		break;
-		case 's':
-			s_flag = 1;
-		break;
-		case 'a':
-			a_flag = 1;
-		break;
-		case 'F':
-		 	F_flag = 1;
-		break;
-		case '?':
-		default:
-			abort();
-		}
-	}
+/**
+ * list curent directory content (with access, owner, group and timestamp)
+ * 
+ * @param dirname   - directory to be listed
+ * 	
+ * @return 0 on success or a positive int on failure
+ */
+int ext_ls_l(char * dirname);
 
-	dir_path = argv[argc-1];
+/**
+ * list curent directory content (with size in blocks)
+ * 
+ * @param dirname   - directory to be listed
+ * 	
+ * @return 0 on success or a positive int on failure
+ */
+int ext_ls_s(char * dirname);
 
-        if(a_flag || s_flag || l_flag || F_flag) {
-		if(!is_dir(dir_path)) {
-			dir_path = ".";
-		}
-	} else {
-		if(strcmp(argv[argc-1], "ls") == 0)
-			dir_path = ".";
-	}
+/**
+ * parse rights from int to mode
+ * 
+ * @param st_mode   - int more to be converted
+ * 	
+ * @return void
+ */
+void readrights(mode_t st_mode);
 
-	if ((dir = opendir (dir_path)) == NULL) {
-        	fprintf (stderr, "%s is not a directory.\n", dir_path);
-        	return -1;
-	}
+/**
+ * command main function
+ * 
+ * @param argc   - calling arguments counter
+ * @param **argv - calling arguments vector
+ * 	
+ * @return 0 on success or a positive int on failure
+ */
+int main(int argc, char *argv[]) {
 
-	while ((dp = readdir (dir)) != NULL) {
-		if(!a_flag) {
-			char c = dp->d_name[0];
-			if(c == '.') continue;
-		}
+    optind = 0;
+    int o;
 
-		if(stat(dp->d_name, &statbuf) == -1)
-			;//continue;
+    char *w_dir = malloc(PATH_MAX * sizeof (char));
+    if (w_dir == NULL) {
+        fprintf(stderr, "ls: cannot allocate memory for \'w_dir\'\n");
+        return 1;
+    }
 
-		if(l_flag) {
-			if(!a_flag && (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)) {
-                	        continue;
-			}
+    if ((w_dir = getcwd(w_dir, PATH_MAX)) == NULL) {
+        fprintf(stderr, "ls: -a: cannot get working directory\n");
+        free(w_dir);
+        return 1;
+    }
 
-			/* Print out type, permissions, and number of links. */
-			printf( (S_ISDIR(statbuf.st_mode)) ? "d" : "-");
-			printf( (statbuf.st_mode & S_IRUSR) ? "r" : "-");
-			printf( (statbuf.st_mode & S_IWUSR) ? "w" : "-");
-			printf( (statbuf.st_mode & S_IXUSR) ? "x" : "-");
-			printf( (statbuf.st_mode & S_IRGRP) ? "r" : "-");
-			printf( (statbuf.st_mode & S_IWGRP) ? "w" : "-");
-			printf( (statbuf.st_mode & S_IXGRP) ? "x" : "-");
-			printf( (statbuf.st_mode & S_IROTH) ? "r" : "-");
-			printf( (statbuf.st_mode & S_IWOTH) ? "w" : "-");
-			printf( (statbuf.st_mode & S_IXOTH) ? "x" : "-");
+    while ((o = getopt(argc, argv, "aFlshu")) != -1) {
+        switch (o) {
+            case 'a':
+                if (argc == 2) { //if called with no dir name then list the curent dir
+                    int tempres = ext_ls_a(w_dir);
+                    free(w_dir);
+                    return tempres;
+                } else if (argc == 3) {
+                    int tempres = ext_ls_a(argv[2]);
+                    free(w_dir);
+                    return tempres;
+                }
+                free(w_dir);
+                return 1;
+            case 'F':
+                if (argc == 2) {
+                    int tempres = ext_ls_F(w_dir);
+                    free(w_dir);
+                    return tempres;
+                } else if (argc == 3) {
+                    int tempres = ext_ls_F(argv[2]);
+                    free(w_dir);
+                    return tempres;
+                }
+                free(w_dir);
+                return 1;
+            case 'l':
+                if (argc == 2) {
+                    int tempres = ext_ls_l(w_dir);
+                    free(w_dir);
+                    return tempres;
+                } else if (argc == 3) {
+                    int tempres = ext_ls_l(argv[2]);
+                    free(w_dir);
+                    return tempres;
+                }
+                free(w_dir);
+                return 1;
+            case 's':
+                if (argc == 2) {
+                    int tempres = ext_ls_s(w_dir);
+                    free(w_dir);
+                    return tempres;
+                } else if (argc == 3) {
+                    int tempres = ext_ls_s(argv[2]);
+                    free(w_dir);
+                    return tempres;
+                }
+                free(w_dir);
+                return 1;
+            case 'h':
+                printf("lists dir content\n");
+                printf("-a, do not hide entries starting with .\n");
+                printf("-F, append indicator (one of */=@|) to entries\n");
+                printf("-l, use a long listing format\n");
+                printf("-s, print size of each file, in blocks \n");
+                printf("-h, display this help and exit\n");
+                printf("-u, shows Author and Version info and exit\n");
+                free(w_dir);
+                return 0;
+            case 'u':
+                printf("Author: ls: Patricia Minica\n");
+                printf("Version: ls: 1.0\n");
+                free(w_dir);
+                return 0;
+            default:
+                free(w_dir);
+                return 2;
+        }
+    }
 
-			printf("%4d", statbuf.st_nlink);
+    //lists the content of working dir
+    if (argc == 1) {
+        int tempres = ext_ls_default(w_dir);
+        free(w_dir);
+        return tempres;
+    }
 
-		    	/* Print out owner's name if it is found using getpwuid(). */
-		   	if ((pwd = getpwuid(statbuf.st_uid)) != NULL)
-		    		printf(" %-8.8s", pwd->pw_name);
-			//else
-			//printf(" %-8d", statbuf.st_uid);
+    //lists the content of the argv[1] dir name
+    if (argc == 2) {
+        int tempres = ext_ls_default(argv[1]);
+        free(w_dir);
+        return tempres;
+    }
 
-	   		/* Print out group name if it is found using getgrgid(). */
-		   	if ((grp = getgrgid(statbuf.st_gid)) != NULL)
-			        printf(" %-8.8s", grp->gr_name);
-			//else
-			//printf(" %-8d", statbuf.st_gid);
-
-			/* Print size of file. */
-			printf(" %9jd", (intmax_t)statbuf.st_size);
-
-			tm = localtime(&statbuf.st_mtime);
-
-	   		/* Get localized date string. */
-			strftime(datestring, sizeof(datestring), nl_langinfo(D_T_FMT), tm);
-			printf(" %s %s\n", datestring, dp->d_name);
-
-		} else if(s_flag) {
-			if(!a_flag && (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)) {
-                	        continue;
-			}
-
-			printf("%ld", statbuf.st_blocks/2);
-			printf(" %s\t", dp->d_name);
-		} else if(F_flag) {
-			if(!a_flag && (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)) {
-                	        continue;
-			}
-
-			printf("%s", dp->d_name);
-			if(S_ISDIR(statbuf.st_mode))  {
-				printf("/\t");
-			} else if(S_ISLNK(statbuf.st_mode)) {
-				printf("@\t");
-			} else if(statbuf.st_mode & S_IXUSR) {
-                        	printf("*\t");
-                        } else {
-				printf("\t");
-			}
-		} else {
-			if(!a_flag && (strcmp(dp->d_name, ".") == 0 || strcmp(dp->d_name, "..") == 0)) {
-                	        continue;
-			}
-
-			printf("%s\t", dp->d_name);
-		}
-
-	}
-
-	printf("\n");
-
-	closedir(dir);
-
-	return 0;
+    free(w_dir);
+    return 0;
 }
+
+//print directory content without . and .. (default behaviour)
+
+int ext_ls_default(char * dirname) {
+
+    DIR *odir = opendir(dirname);
+    struct dirent *rdir;
+
+    if (odir == NULL) {
+        printf("%s\n", dirname);
+        return 1;
+    }
+
+    while ((rdir = readdir(odir)) != NULL) {
+        if (rdir->d_name[0] != '.') {
+            printf("%-10.20s", rdir->d_name);
+        }
+    }
+    printf("\n");
+
+    if (closedir(odir) == -1) {
+        fprintf(stderr, "ls: unable to close \'%s\' directory\n", dirname);
+        return 1;
+    }
+
+    return 0;
+}
+//-----------------------------------------------------------------------
+
+//print all directory content
+
+int ext_ls_a(char * dirname) {
+
+    DIR *odir= opendir(dirname);
+    struct dirent *rdir;
+
+    if (odir == NULL) {
+        printf("%s\n", dirname);
+        return 1;
+    }
+
+    while (rdir = readdir(odir)) {
+        printf("%-10.20s ", rdir->d_name);
+    }
+    printf("\n");
+        
+    if (closedir(odir) == -1) {
+        fprintf(stderr, "ls: unable to close \'%s\' directory\n", dirname);
+        return 1;
+    }
+
+    return 0;
+}
+//-----------------------------------------------------------------------
+
+//print directory content and add * or / to the file name
+
+int ext_ls_F(char * dirname) {
+
+    DIR *odir;
+    struct dirent *rdir;
+    struct stat f_info;
+    char * temp = malloc(NAME_MAX * sizeof (char *));
+    if (temp == NULL) {
+        fprintf(stderr, "ls -F: cannot allocate memory for \'temp\'\n");
+        return 1;
+    }
+
+    char * tempp = malloc(PATH_MAX * sizeof (char *));
+    if (tempp == NULL) {
+        fprintf(stderr, "ls -F: cannot allocate memory for \'tempp\'\n");
+        free(temp);
+        return 1;
+    }
+
+    if (dirname[strlen(dirname) - 1] == '/') { //remove / from the end of the string
+        dirname[strlen(dirname) - 1] = '\0';
+    }
+
+    odir = opendir(dirname);
+    if (odir == NULL) {
+        printf("%s\n", dirname);
+        free(temp);
+        free(tempp);
+        return 1;
+    }
+
+    while (rdir = readdir(odir)) {
+        if (rdir->d_name[0] != '.') {
+            strcpy(tempp, dirname);
+            strcat(tempp, "/");
+            strcat(tempp, rdir->d_name);
+
+            if (stat(tempp, &f_info) != 0) {
+                fprintf(stderr, "ls: -F: cannot read \'%s\' file atributes\n", rdir->d_name);
+                free(temp);
+                free(tempp);
+                return 1;
+            }
+
+            if (f_info.st_mode & S_IFDIR) { //if file is a dir add / at the end
+                strcpy(temp, rdir->d_name);
+                strcat(temp, "/");
+                printf("%-10.20s ", temp);
+            }
+            else if ((f_info.st_mode & S_IXUSR) || (f_info.st_mode & S_IXGRP) || (f_info.st_mode & S_IXOTH)) {
+                //if file is exe
+                strcpy(temp, rdir->d_name);
+                strcat(temp, "*");
+                printf("%-10.20s ", temp);
+            }
+            else {
+                printf("%-10.20s ", rdir->d_name);
+            }
+        }
+    }
+
+    printf("\n");
+    
+    if (closedir(odir) == -1) {
+        fprintf(stderr, "ls: unable to close \'%s\' directory\n", dirname);
+        free(temp);
+        free(tempp);
+        return 1;
+    }
+
+    free(temp);
+    free(tempp);
+    return 0;
+}
+//-----------------------------------------------------------------------
+
+//print directory content without . and .. long format
+
+int ext_ls_l(char * dirname) {
+
+    DIR *odir;
+    struct dirent *rdir;
+    struct stat f_info;
+    struct tm * ptm;
+    struct passwd *uiname;
+    struct group *giname;
+    char * temp = malloc(PATH_MAX * sizeof (char *));
+    if (temp == NULL) {
+        fprintf(stderr, "ls -l: cannot allocate memory for \'temp\'\n");
+        return 1;
+    }
+
+    if (dirname[strlen(dirname) - 1] == '/') { //remove / from the end of the string
+        dirname[strlen(dirname) - 1] = '\0';
+    }
+
+    odir = opendir(dirname);
+    if (odir == NULL) {
+        printf("%s\n", dirname);
+        free(temp);
+        return 1;
+    }
+
+    while (rdir = readdir(odir)) {
+        if (rdir->d_name[0] != '.') {
+            strcpy(temp, dirname);
+            strcat(temp, "/");
+            strcat(temp, rdir->d_name);
+
+            if (stat(temp, &f_info) == -1) {
+                //if stst fails the "file" may be a symbolic link, try to open with lstat
+                if (lstat(temp, &f_info) == -1) {
+                    fprintf(stderr, "ls: -l: cannot read \'%s\' file atributes\n", rdir->d_name);
+                    free(temp);
+                    return 1;
+                } else {
+                    if (f_info.st_mode & S_IFLNK) printf("l");
+                    else printf("-");
+                }
+
+            } else {
+                if (f_info.st_mode & S_IFDIR) printf("d");
+                else printf("-");
+            }
+
+            readrights(f_info.st_mode);
+
+            printf("%2d ", (int) f_info.st_nlink);
+
+            uiname = getpwuid(f_info.st_uid);
+            printf("%-7.15s ", uiname->pw_name);
+
+            giname = getgrgid(f_info.st_gid);
+            printf("%-7.15s ", giname->gr_name);
+
+            printf("%7d ", (int) f_info.st_size);
+
+            ptm = gmtime(&f_info.st_mtime);
+            printf("%4d-%02d-%02d %2d:%02d ", (ptm->tm_year) + 1900,
+                    ptm->tm_mon, ptm->tm_mday, (ptm->tm_hour) % 24, ptm->tm_min);
+
+            printf("%s\n", rdir->d_name);
+
+        }
+    }
+
+    if (closedir(odir) == -1) {
+        fprintf(stderr, "ls: unable to close \'%s\' directory\n", dirname);
+        free(temp);
+        return 1;
+    }
+
+    free(temp);
+    return 0;
+}
+//-----------------------------------------------------------------------
+
+//print directory content without . and .. and size in blocks
+
+int ext_ls_s(char * dirname) {
+
+    DIR *odir;
+    struct dirent *rdir;
+    struct stat f_info;
+    char * temp = malloc(PATH_MAX * sizeof (char *));
+
+    if (dirname[strlen(dirname) - 1] == '/') { //remove / from the end of the string
+        dirname[strlen(dirname) - 1] = '\0';
+    }
+
+    odir = opendir(dirname);
+    if (odir == NULL) {
+        printf("%s\n", dirname);
+        free(temp);
+        return 1;
+    }
+
+    while (rdir = readdir(odir)) {
+        if (rdir->d_name[0] != '.') {
+            strcpy(temp, dirname);
+            strcat(temp, "/");
+            strcat(temp, rdir->d_name);
+
+            if (stat(temp, &f_info) != 0) {
+                fprintf(stderr, "ls: -s: cannot read \'%s\' file atributes\n", rdir->d_name);
+                free(temp);
+                return 1;
+            }
+
+            //FIXME the size if double then the console function reports (bug???)
+            printf(" %d ", (int) f_info.st_blocks);
+            printf("%s\t", rdir->d_name);
+        }
+    }
+
+    printf("\n");
+
+    if (closedir(odir) == -1) {
+        fprintf(stderr, "ls: unable to close \'%s\' directory\n", dirname);
+        free(temp);
+        return 1;
+    }
+
+    free(temp);
+    return 0;
+}
+//-----------------------------------------------------------------------
+
+//read the file rights
+
+void readrights(mode_t st_mode) {
+
+    if (st_mode & S_IRUSR) printf("r");
+    else printf(" -");
+    if (st_mode & S_IWUSR) printf("w");
+    else printf("-");
+    if (st_mode & S_IXUSR) printf("x");
+    else printf("-");
+    if (st_mode & S_IRGRP) printf("r");
+    else printf("-");
+    if (st_mode & S_IWGRP) printf("w");
+    else printf("-");
+    if (st_mode & S_IXGRP) printf("x");
+    else printf("-");
+    if (st_mode & S_IROTH) printf("r");
+    else printf("-");
+    if (st_mode & S_IWOTH) printf("w");
+    else printf("-");
+    if (st_mode & S_IXOTH) printf("x ");
+    else printf("- ");
+
+}
+//-----------------------------------------------------------------------

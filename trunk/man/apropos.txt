@@ -1,0 +1,11 @@
+APROPOS
+
+
+NAME
+	apropos - search the whatis database for strings  
+
+SYNOPSIS
+	apropos keyword ...  
+
+DESCRIPTION
+	apropos searches a set of database files containing short descriptions of system commands for keywords and displays the result on the standard output.  
